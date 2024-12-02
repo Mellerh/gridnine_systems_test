@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
+
 public class TaskResolvingImpl implements TaskResolving {
     @Override
     public List<Flight> checkDepartureBeforeCurrentTime(List<Flight> flights) {
@@ -33,7 +34,7 @@ public class TaskResolvingImpl implements TaskResolving {
 
         return flights.stream()
                 .filter(flight -> flight.getSegments().stream()
-                        .allMatch(segment -> segment.getDepartureDate().isBefore(LocalDateTime.now())))
+                        .allMatch(segment -> segment.getDepartureDate().isAfter(LocalDateTime.now())))
                 .collect(Collectors.toList());
 
 
@@ -42,29 +43,34 @@ public class TaskResolvingImpl implements TaskResolving {
     @Override
     public List<Flight> checkTimeSegments(List<Flight> flights) {
 
-        List<Flight> finalListOfFlights = new ArrayList<>();
+//        List<Flight> finalListOfFlights = new ArrayList<>();
+//
+//        for (int i = 0; i < flights.size(); i++) {
+//            List<Segment> segments = flights.get(i).getSegments();
+//
+//            boolean isTimeBefore = true;
+//
+//            for (int k = 0; k < segments.size(); k++) {
+//                LocalDateTime dep = segments.get(k).getDepartureDate();
+//                LocalDateTime arr = segments.get(k).getArrivalDate();
+//
+//                if (dep.isAfter(arr)) {
+//                    isTimeBefore = false;
+//                    break;
+//                }
+//            }
+//
+//            if (isTimeBefore) {
+//                finalListOfFlights.add(flights.get(i));
+//            }
+//        }
 
-        for (int i = 0; i < flights.size(); i++) {
-            List<Segment> segments = flights.get(i).getSegments();
+//        return finalListOfFlights;
 
-            boolean isTimeBefore = true;
-
-            for (int k = 0; k < segments.size(); k++) {
-                LocalDateTime dep = segments.get(k).getDepartureDate();
-                LocalDateTime arr = segments.get(k).getArrivalDate();
-
-                if (dep.isAfter(arr)) {
-                    isTimeBefore = false;
-                    break;
-                }
-            }
-
-            if (isTimeBefore) {
-                finalListOfFlights.add(flights.get(i));
-            }
-        }
-
-        return finalListOfFlights;
+        return flights.stream()
+                .filter(flight -> flight.getSegments().stream()
+                        .allMatch(segment -> segment.getDepartureDate().isBefore(segment.getArrivalDate())))
+                .collect(Collectors.toList());
     }
 
     @Override
