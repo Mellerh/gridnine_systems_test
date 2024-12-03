@@ -2,7 +2,7 @@
   <artifact type="jar" name="grindle system:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/grindle_system_jar</output-path>
     <root id="archive" name="grindle system.jar">
-      <element id="module-output" name="grindle system" />
+      <element id="module-output" name="gridnine systems" />
     </root>
   </artifact>
 </component>
