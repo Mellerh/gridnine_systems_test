@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 public class TaskResolvingImpl implements TaskResolving {
     @Override
     public List<Flight> checkDepartureBeforeCurrentTime(List<Flight> flights) {
+        LocalDateTime now = LocalDateTime.now();
 
 //        List<Flight> finalListOfFlights = new ArrayList<>();
 //
@@ -34,11 +35,10 @@ public class TaskResolvingImpl implements TaskResolving {
 
         return flights.stream()
                 .filter(flight -> flight.getSegments().stream()
-                        .allMatch(segment -> segment.getDepartureDate().isAfter(LocalDateTime.now())))
+                        .allMatch(segment -> segment.getDepartureDate().isAfter(now)))
                 .collect(Collectors.toList());
-
-
     }
+
 
     @Override
     public List<Flight> checkTimeSegments(List<Flight> flights) {

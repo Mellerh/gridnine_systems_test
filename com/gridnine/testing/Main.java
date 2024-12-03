@@ -9,10 +9,10 @@ public class Main {
         TaskResolving taskResolving = new TaskResolvingImpl();
 
         List<Flight> checkDeparture = taskResolving.checkDepartureBeforeCurrentTime(FlightBuilder.createFlights());
-//        System.out.println(checkDeparture);
+        System.out.println(checkDeparture);
 
         List<Flight> checkTime = taskResolving.checkTimeSegments(FlightBuilder.createFlights());
-//        System.out.println(checkTime);
+        System.out.println(checkTime);
 
         List<Flight> checkTotalTime = taskResolving.checkTotalTimeOnEarth(FlightBuilder.createFlights());
         System.out.println(checkTotalTime);
